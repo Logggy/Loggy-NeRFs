@@ -19,5 +19,5 @@ This webpage will give a detailed description of how NeRFs work, starting with t
 
 ### Where to next?
 
-- **All About NeRFs →** {{ "/nerfs/" | relative_url }}
-- **Smurfstudio →** {{ "/smurfstudio/" | relative_url }}
+- [**All About NeRFs →**]({{ "/nerfs/" | relative_url }})
+- [**Smurfstudio →**]({{ "/smurfstudio/" | relative_url }})
