@@ -2,10 +2,8 @@
 layout: default
 nav: nerfs
 permalink: /nerfs/
-title: All About NeRFs Page
+title: All About NeRFs
 ---
-
-# All About NeRFs Page
 
 ## Vanilla NeRF (2020)
 
