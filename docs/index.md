@@ -5,7 +5,7 @@ nav: home
 permalink: /
 title: Introduction Page
 description: A gentle intro to NeRFs and what this site covers.
----------------------------------------------------------------
+---
 
 # Introduction Page
 
