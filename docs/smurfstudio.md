@@ -25,4 +25,4 @@ Finally, at some point you may want to simply output images from a model instead
 I will probably continue to add more to this page where appropriate, if something is missing and you figure it ought to be included here, please let me know!
 
 
-![Smurfstudio training timelapse]({{ "/assets/img/skeleton-doot.gif" | relative_url }})
+> ![Smurfstudio training timelapse]({{ "/assets/img/skeleton-doot.gif" | relative_url }})
