@@ -1,68 +1,29 @@
 ---
+
 layout: default
 nav: home
 permalink: /
-title: Introduction to NeRFs
----
+title: Introduction Page
+description: A gentle intro to NeRFs and what this site covers.
+---------------------------------------------------------------
 
+# Introduction Page
 
 ## What is a NeRF?
 
+Neural Radiance Fields (NeRFs) are relatively new 3D modeling frameworks which can learn fully continuous 3D representations of scenes captured from a handful of 2D images. More specifically, these models train a neural network to describe the radiance field present within a scene. Originally proposed by Mildenhall et al. (2020), NeRFs have come a long way in just about every aspect of their performance (speed, size, accuracy, etc.), and are in the perfect spot for researchers to mature them into powerful tools for use in the aerospace industry.
 
-Neural Radiance Fields (NeRFs) are 3D scene representations that learn a function mapping position and view direction to density and color. With posed images as supervision, they synthesize novel views by **volumetric rendering**.
+This webpage will give a detailed description of how NeRFs work, starting with the original 2020 model, and the models I have changed/created so far. I will try my best to outline the most important aspects of these models I have learned in order to prevent most of the growing pains I encountered initially. I recommend covering the section describing how these models are made first, but if you are already familiar you may go ahead and check out my work and how to use it.
 
-
-> If you’re already familiar, jump to **[All About NeRFs]({{ "/nerfs/" | relative_url }})** or **[Smurfstudio]({{ "/smurfstudio/" | relative_url }})**.
-
-
-### Volumetric vs. Surface Rendering
-
-
-- *Volumetric (NeRF)*: any point in space can absorb/emit light.
-- *Surface (rasterization)*: triangles + shaders on surfaces.
-
-
-### Camera Model (Pinhole)
-
-
-**Intrinsics**
-\[\mathbf K=\begin{bmatrix}f_x&s&c_x\\0&f_y&c_y\\0&0&1\end{bmatrix}\]
-
-
-**Extrinsics** (world→camera)
-\[\mathbf T_{cw}=\begin{bmatrix}\mathbf R&\mathbf t\\\mathbf 0^\top&1\end{bmatrix},\quad \mathbf T_{cw}=\mathbf T_{wc}^{-1}=\big[\,\mathbf R_{wc}^\top\mid-\mathbf R_{wc}^\top\mathbf t_{wc}\,\big].\]
-
-
-**Ray through a pixel**
-\[\mathbf r(t)=\mathbf o+t\,\mathbf d,\quad t\in[\,t_n,t_f\,].\]
-
-
-> **Image:** Pinhole camera geometry
-> ![pinhole](https://upload.wikimedia.org/wikipedia/commons/3/3b/Pinhole-camera.svg)
-
-
-### Rendering (High Level)
-
-
-Color along a ray integrates emitted color times differential opacity, attenuated by transmittance (details in the next page).
-
+> **Fun teaser image** (we’ll save the pinhole camera diagram for later):
+>
+> !\[A colorful teaser render — drop your own image at assets/img/intro-nerf.jpg]\({{ "/assets/img/intro-nerf.jpg" | relative\_url }})
+>
+> *Tip:* Replace `assets/img/intro-nerf.jpg` with one of your own renders to personalize the page.
 
 ---
 
+### Where to next?
 
-## Why NeRFs Matter
-
-
-- *Photo‑realistic view synthesis* from sparse views.
-- *Compact continuous representation* instead of heavy meshes.
-- *Generalizable frameworks*: many extensions handle unbounded scenes, dynamic content, and fast training.
-
-
----
-
-
-## Quick Links
-
-
-- **All About NeRFs →** {{ "/nerfs/" | relative_url }}
-- **Smurfstudio →** {{ "/smurfstudio/" | relative_url }}
+* **All About NeRFs →** {{ "/nerfs/" | relative_url }}
+* **Smurfstudio →** {{ "/smurfstudio/" | relative_url }}
