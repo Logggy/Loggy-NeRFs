@@ -16,7 +16,7 @@ If you want to truly understand what a NeRF is and how they work, then you shoul
 
 The basic idea of the first NeRF model itself is pretty simple: every point in space has the potential to interact with light in some way, and we can use a neural network to approximate it. This makes NeRF a **volumetric renderer**, since it assumes that there are points anywhere in space that can emit or absorb light. You can compare this to other methods you know, one of the most popular being **surface-based renderers**, which use meshes (often triangles) to represent surfaces in a 3D scene which can then be illuminated and transformed to a 2D image (this is how most video games work).
 
-The neural network in a NeRF model learns a continuous representation for the underlying radiance field, mapping each point in space to a position-dependent density value \( \sigma(\mathbf{x}) \) and a position- and view-dependent color value \( \mathbf{c}(\mathbf{x}, \mathbf{d}) \). In other words, NeRF takes a **5D input** (3D position \( \mathbf{x} \) and 2D direction on the sphere \( \mathbf{d} \)) and predicts density and color. This covers the “3D” representation of the scene, but all the images we view on our monitors are 2D, so we need a rendering step to get pixels from the field.
+The neural network in a NeRF model learns a continuous representation for the underlying radiance field, mapping each point in space to a position-dependent density value $$\sigma(\mathbf{x})$$ and a position- and view-dependent color value $$\mathbf{c}(\mathbf{x}, \mathbf{d})$$. In other words, NeRF takes a **5D input** (3D position $$\mathbf{x}$$ and 2D direction on the sphere $$\mathbf{d}$$) and predicts density and color. This covers the “3D” representation of the scene, but all the images we view on our monitors are 2D, so we need a rendering step to get pixels from the field.
 
 #### Virtual Cameras
 
@@ -39,7 +39,7 @@ f_x & s & c_x\\
 \tilde{\mathbf p}_{\text{pix}} \propto \mathbf K\,\tilde{\mathbf x}_c .
 $$
 
-Here \(f_x\) and \(c_x\) are the x-axis focal length and optical center (in pixel units) with \(f_y\) and \(c_y\) representing the same for the y-axis. \(s\) is usually \(0\), and represents sensor skew. This matrix takes any camera-frame point \( \mathbf p_c = [X,Y,Z]^\top \) (or \( \tilde{\mathbf x}_c \) in homogeneous coordinates) and maps it to pixel space. **Remember,** \( \mathbf K \) is expressed in the **camera** reference frame.
+Here $$f_x$$ and $$c_x$$ are the x-axis focal length and optical center (in pixel units) with $$f_y$$ and $$c_y$$ representing the same for the y-axis. $$s$$ is usually $$0$$, and represents sensor skew. This matrix takes any camera-frame point $$ \mathbf p_c = [X,Y,Z]^\top $$ (or $$ \tilde{\mathbf x}_c $$ in homogeneous coordinates) and maps it to pixel space. **Remember,** $$ \mathbf K $$ is expressed in the **camera** reference frame.
 
 The **extrinsic matrix** maps a 3D point centered at some arbitrary point in the world to a 3D point centered in the camera reference frame. This can be seen as the combination of a rotation and a translation, and is represented as:
 
@@ -53,7 +53,7 @@ $$
 \tilde{\mathbf x}_c = \mathbf T_{cw}\,\tilde{\mathbf x}_w .
 $$
 
-Here \( \mathbf R \) is a rotation matrix and \( \mathbf t \) is the translation from world to camera space (if the world is centered at the origin, this is the camera’s position expressed in the camera-from-world transform). If you have camera-to-world \( \mathbf T_{wc} \), then \( \mathbf T_{cw} = \mathbf T_{wc}^{-1} = \big[\mathbf R_{wc}^\top \mid -\mathbf R_{wc}^\top \mathbf t_{wc}\big] \).
+Here $$\mathbf R$$ is a rotation matrix and $$\mathbf t$$ is the translation from world to camera space (if the world is centered at the origin, this is the camera’s position expressed in the camera-from-world transform). If you have camera-to-world $$ \mathbf T_{wc} $$, then $$ \mathbf T_{cw} = \mathbf T_{wc}^{-1} = \big[\mathbf R_{wc}^\top \mid -\mathbf R_{wc}^\top \mathbf t_{wc}\big] $$.
 
 This is mostly all we need to represent a camera in a virtual scene and generate images from it. In the case of NeRFs we will also incorporate **ray marching**, meaning that from every pixel on our camera we will cast a ray into the scene that we sample across. Once you have the virtual camera set up this is as simple as plotting a line that passes through the camera position and the center of each pixel in the projected image. A ray in world coordinates is:
 
@@ -61,7 +61,7 @@ $$
 \mathbf r(t) = \mathbf o + t\,\mathbf d, \qquad t \in [t_n, t_f],
 $$
 
-with origin \( \mathbf o \) (the camera center) and unit direction \( \mathbf d \) computed from \( \mathbf K \) and \( \mathbf T_{cw} \).
+with origin $$ \mathbf o $$ (the camera center) and unit direction $$ \mathbf d $$ computed from $$ \mathbf K $$ and $$ \mathbf T_{cw} $$.
 
 > **Ray marching / volume ray casting (illustrative)**
 >
@@ -82,7 +82,7 @@ T(t)\,\sigma\!\big(\mathbf r(t)\big)\,
 T(t) = \exp\!\Big(-\!\!\int_{t_n}^{t} \sigma\!\big(\mathbf r(s)\big)\,ds\Big).
 $$
 
-where \( t_n \) and \( t_f \) are the near and far bounds along a ray, \( T(t) \) is the **accumulated transmittance** (the probability a ray travels from \( t_n \) to \( t \) without hitting another particle), \( \mathbf r(t) \) is the camera ray characterized by origin \( \mathbf o \), direction \( \mathbf d \) and length \( t \) \((\mathbf r(t)=\mathbf o + t\,\mathbf d)\), \( \sigma(\mathbf r(t)) \) is the position-dependent density, and \( \mathbf c(\mathbf r(t), \mathbf d) \) is the position- and view-dependent color.
+where $$t_n$$ and $$t_f$$ are the near and far bounds along a ray, $$T(t)$$ is the **accumulated transmittance** (the probability a ray travels from $$t_n$$ to $$t$$ without hitting another particle), $$\mathbf r(t)$$ is the camera ray characterized by origin $$\mathbf o$$, direction $$\mathbf d$$ and length $$t$$ $$(\mathbf r(t)=\mathbf o + t\,\mathbf d)$$, $$\sigma(\mathbf r(t))$$ is the position-dependent density, and $$\mathbf c(\mathbf r(t), \mathbf d)$$ is the position- and view-dependent color.
 
 Sadly we cannot do this exactly in practice, as it would require infinite sampling, so we instead estimate it using **quadrature with stratified sampling** (consult Mildenhall et al., 2020). In the end we are able to estimate the color values of rays using:
 
@@ -98,7 +98,7 @@ $$
 \Delta_i = t_{i+1}-t_i .
 $$
 
-where \( \Delta_i \) is the distance between adjacent samples, \( \sigma_i=\sigma(\mathbf r(t_i)) \), and \( \mathbf c_i=\mathbf c(\mathbf r(t_i),\mathbf d) \).
+where $$\Delta_i$$ is the distance between adjacent samples, $$\sigma_i=\sigma(\mathbf r(t_i))$$, and $$\mathbf c_i=\mathbf c(\mathbf r(t_i),\mathbf d)$$.
 
 To recap, we have a way to represent the color and density at each point in these scenes, and using the rays cast from our virtual cameras we can now approximate full images from these scenes! To optimize this network we randomly sample and approximate rays from many different images and compare them to their ground truth pixel counterparts, constructing a loss function from their mean squared error. In the end the loss function looks like this:
 
@@ -122,7 +122,7 @@ $$
 $$
 
 The final addition is a **hierarchical volume sampling** method. Without any guidance as to where we sample along our rays, there's a good chance that most of them land in empty space, harming reconstruction quality and slowing training time. NeRF (2020) guides sampling by simultaneously training two NeRF fields, one **coarse** and one **fine**. Using the outputs from the coarse NeRF we construct a PDF along the ray representing where density likely is and isn’t. By sampling additionally from this PDF and including these new samples, then running a **fine** NeRF pass, we greatly increase the number of meaningful samples per step, boosting reconstruction accuracy and convergence speed. Modern models use a flavor of this called a **proposal network**. In essence, proposal networks attempt to predict where density in the scene is, and optimize themselves by comparing their approximated density outputs to those produced by the NeRF. When these networks learn where the objects present in a scene are, it allows us to consistently sample at or near where we want to (as opposed to empty space). A common weight used for this PDF is
-\( w_i = T_i\,\alpha_i \).
+$$w_i = T_i\,\alpha_i$$.
 
 ## More NeRFs
 
@@ -140,7 +140,7 @@ Vanilla NeRF was just the beginning in 2020, and nowadays there are MANY models,
   Paper: https://arxiv.org/abs/2201.05989 · Project: https://nvlabs.github.io/instant-ngp/
 - **Mip-NeRF 360 (2022)** — Robust unbounded scene optimization introducing a number of changes, namely the now-standard proposal network.  
   Abs: https://arxiv.org/abs/2111.12077 · PDF: https://openaccess.thecvf.com/content/CVPR2022/papers/Barron_Mip-NeRF_360_Unbounded_Anti-Aliased_Neural_Radiance_Fields_CVPR_2022_paper.pdf
-- **K-Planes (2023)** — Uses \(d \choose 2\) planes to represent a radiance field, allowing for 4D representation of NeRFs (time-varying scenes), while remaining competitive on static 3D scenes.  
+- **K-Planes (2023)** — Uses $$d \choose 2$$ planes to represent a radiance field, allowing for 4D representation of NeRFs (time-varying scenes), while remaining competitive on static 3D scenes.  
   Paper: https://arxiv.org/abs/2301.10241 · Project: https://sarafridov.github.io/K-Planes/
 - **Zip-NeRF (2023)** — Builds on Mip-NeRF 360 while incorporating Instant-NGP-style advances, achieving much faster training on unbounded scenes.  
   Paper: https://arxiv.org/abs/2304.06706 · PDF: https://openaccess.thecvf.com/content/ICCV2023/papers/Barron_Zip-NeRF_Anti-Aliased_Grid-Based_Neural_Radiance_Fields_ICCV_2023_paper.pdf
