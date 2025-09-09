@@ -1,0 +1,39 @@
+:root{
+--bg: #0d0e10;
+--fg: #e7e7e7;
+--muted: #a5a7ab;
+--card: #14161a;
+--border: #22252b;
+--link: #ff4d4f; /* red accent */
+--link-strong: #ff2d2f; /* deeper red */
+--brand-grad-a: #ff5858;
+--brand-grad-b: #ff7a45;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+.container{max-width:980px;margin:0 auto;padding:1.2rem}
+.site-header{border-bottom:1px solid var(--border);background:linear-gradient(135deg,var(--brand-grad-a),var(--brand-grad-b))}
+.site-header .container{display:flex;align-items:center;gap:1rem}
+.site-title{font-weight:800;color:#220000;text-decoration:none;letter-spacing:.3px}
+.site-nav{margin-left:auto;display:flex;gap:.75rem}
+.site-nav a{color:#330000;background:rgba(255,255,255,.5);padding:.35rem .6rem;border-radius:.6rem;text-decoration:none;font-weight:600}
+.site-nav a.active{background:#fff;color:#a00000}
+.content{padding:2rem 1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1.2rem;box-shadow:0 1px 10px rgba(0,0,0,.2)}
+.card h1{margin-top:.2rem}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-strong)}
+.site-footer{border-top:1px solid var(--border);padding:1rem 0;color:var(--muted)}
+.site-footer .container{display:flex;gap:.5rem;align-items:center}
+.site-footer a{color:var(--muted)}
+.site-footer a:hover{color:var(--fg)}
+img{max-width:100%;height:auto;border-radius:.5rem}
+pre,code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+blockquote{border-left:3px solid var(--link);padding-left:.9rem;color:#f0caca}
+hr{border:0;border-top:1px solid var(--border);margin:2rem 0}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{border:1px solid var(--border);padding:.5rem .6rem}
+
+
+/* MathJax block spacing */
+mjx-container{margin:.25rem 0}

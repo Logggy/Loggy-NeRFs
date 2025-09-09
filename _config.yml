@@ -1,0 +1,26 @@
+# GitHub Pages config
+# If you’re publishing from /docs, set baseurl: "/<repo>" and url: "https://<user>.github.io"
+# For most project pages, you can leave url/baseurl blank and Pages will handle it.
+
+
+markdown: kramdown
+kramdown:
+input: GFM
+math_engine: mathjax
+syntax_highlighter: rouge
+
+
+# Optional site metadata
+title: "NeRFs — A Complete Write‑Up"
+description: "From the original 2020 NeRF to modern variants, cameras, equations, and training with Smurfstudio."
+author: "Logan Selph"
+
+
+# Build settings
+plugins:
+- jekyll-feed
+
+
+# If using /docs as the site root, uncomment the two lines below and edit.
+# url: "https://<user>.github.io"
+# baseurl: "/<repo>"
