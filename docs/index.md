@@ -19,8 +19,6 @@ This webpage will give a detailed description of how NeRFs work, starting with t
 >
 > !\[A colorful teaser render — drop your own image at assets/img/intro-nerf.jpg]\({{ "/assets/img/Nerfsat.jpg" | relative_url }})
 
----
-
 ### Where to next?
 
 * **All About NeRFs →** {{ "/nerfs/" | relative_url }}
